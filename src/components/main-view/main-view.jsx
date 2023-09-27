@@ -29,10 +29,13 @@ export const MainView = () => {
         }
     ]);
 
-    const [selectedMovie, setSelectedMovie] useState(null);
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     if (selectedMovie) {
-        return <movieView movie = {selectedMovie} />;
+        return (
+          <MovieView movie = {selectedMovie} onBackClick={() => 
+          setSelectedMovie(null)} />
+        );
     }
 
     if (movies.length == 0) {
@@ -52,4 +55,4 @@ export const MainView = () => {
           ))}
       </div>
     );
-}
+};

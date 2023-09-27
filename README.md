@@ -52,5 +52,5 @@ _Profile View_
 
 - npm install -g parcel
 - npm install -save react react-dom
-- create a src folder in project directory with three files: index.jsx, index.scss, index.html
+<!-- - create a src folder in project directory with three files: index.jsx, index.scss, index.html -->
 - run parcel src/index.html in terminal to begin parcel build

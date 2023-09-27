@@ -27360,26 +27360,17 @@ const MainView = ()=>{
         columnNumber: 15
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                OnClick: ()=>{
-                    alert("Nice!");
-                },
-                children: "Click Me"
-            }, void 0, false, {
+        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                movie: movie,
+                onMovieClick: (newSelectedMovie)=>{
+                    setSelectedMovie(newSelectedMovie);
+                }
+            }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 44,
-                columnNumber: 13
-            }, undefined),
-            movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                    movie: movie
-                }, movie.id, false, {
-                    fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 52,
-                    columnNumber: 17
-                }, undefined))
-        ]
-    }, void 0, true, {
+                lineNumber: 45,
+                columnNumber: 15
+            }, undefined))
+    }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
         lineNumber: 43,
         columnNumber: 9

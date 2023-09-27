@@ -41,16 +41,15 @@ export const MainView = () => {
 
     return (
         <div>
-            <button
-            OnClick={() => {
-                alert("Nice!");
-            }}
-            >
-            Click Me
-            </button>
             {movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-            ))}
-        </div>
+              <MovieCard 
+              key={movie.id} 
+              movie={movie}
+              onMovieClick={(newSelectedMovie) =>  {
+                setSelectedMovie(newSelectedMovie);
+              }}
+            />
+          ))}
+      </div>
     );
 }

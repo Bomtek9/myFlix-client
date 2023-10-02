@@ -7,8 +7,13 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   useEffect(() => {
-    fetch();
-  });
+    fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies");
+    .then((response) => response.json())
+      .then((data) => {
+        console.log("movies from api:", data);
+      });
+  }, []);
+
 
   if (selectedMovie) {
     return (

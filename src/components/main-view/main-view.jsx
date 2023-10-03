@@ -10,6 +10,7 @@ export const MainView = () => {
     fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
+        console.log("API Response:", data); // Log the response data
         if (Array.isArray(data.docs)) {
           const movieFromApi = data.docs.map((doc) => {
             return {
@@ -59,7 +60,7 @@ export const MainView = () => {
   }
 
   // Handle the case when there are no movies
-  return <div>The List is Empty</div>;
+  return <div>The List is Really Empty</div>;
 };
 
 export default MainView;

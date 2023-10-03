@@ -27187,6 +27187,7 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
+            console.log("API Response:", data); // Log the response data
             if (Array.isArray(data.docs)) {
                 const movieFromApi = data.docs.map((doc)=>{
                     return {
@@ -27212,7 +27213,7 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 37,
+        lineNumber: 38,
         columnNumber: 7
     }, undefined);
     if (movies.length > 0) // Render the list of movies
@@ -27224,20 +27225,20 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 49,
+                lineNumber: 50,
                 columnNumber: 11
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 47,
+        lineNumber: 48,
         columnNumber: 7
     }, undefined);
     // Handle the case when there are no movies
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: "The List is Empty"
+        children: "The List is Really Empty"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 62,
+        lineNumber: 63,
         columnNumber: 10
     }, undefined);
 };

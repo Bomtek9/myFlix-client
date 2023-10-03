@@ -47,7 +47,6 @@ node_modules/@humanwhocodes/module-importer/dist/module-importer.d.cts
 node_modules/@humanwhocodes/module-importer/LICENSE
 node_modules/@humanwhocodes/module-importer/package.json
 node_modules/@humanwhocodes/module-importer/README.md
-node_modules/@humanwhocodes/module-importer/src/module-importer.cjs
 node_modules/@humanwhocodes/object-schema/.github/workflows/nodejs-test.yml
 node_modules/@humanwhocodes/object-schema/.github/workflows/release-please.yml
 node_modules/@humanwhocodes/object-schema/CHANGELOG.md

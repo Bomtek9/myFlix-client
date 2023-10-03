@@ -41,21 +41,25 @@ export const MainView = () => {
     );
   }
 
-  if (movies.length === 0) {
-    return <div>The List is Empty</div>;
+  if (movies.length > 0) {
+    // Render the list of movies
+    return (
+      <div>
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie._id}
+            movie={movie}
+            onMovieClick={(newSelectedMovie) => {
+              setSelectedMovie(newSelectedMovie);
+            }}
+          />
+        ))}
+      </div>
+    );
   }
 
-  return (
-    <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie._id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-    </div>
-  );
+  // Handle the case when there are no movies
+  return <div>The List is Empty</div>;
 };
+
+export default MainView;

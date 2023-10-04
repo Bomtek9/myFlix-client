@@ -27192,7 +27192,7 @@ const MainView = ()=>{
                 const movieFromApi = jsondata.map((doc)=>{
                     return {
                         _id: doc._id,
-                        Name: doc.Name,
+                        Title: doc.Title,
                         ImagePath: doc.ImagePath,
                         Description: doc.Description,
                         Genre: {

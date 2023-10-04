@@ -27189,7 +27189,7 @@ const MainView = ()=>{
         fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
             console.log("API Response:", data); // Log the response data
             if (Array.isArray(data.docs)) {
-                const movieFromApi = data.docs.map((doc)=>{
+                const movieFromApi = jsondata.map((doc)=>{
                     return {
                         _id: doc._id,
                         Name: doc.Name,

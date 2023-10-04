@@ -12,10 +12,10 @@ export const MainView = () => {
       .then((data) => {
         console.log("API Response:", data); // Log the response data
         if (Array.isArray(data.docs)) {
-          const movieFromApi = data.docs.map((doc) => {
+          const movieFromApi = jsondata.map((doc) => {
             return {
               _id: doc._id,
-              Name: doc.Name,
+              Title: doc.Title,
               ImagePath: doc.ImagePath,
               Description: doc.Description,
               Genre: {

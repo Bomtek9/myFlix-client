@@ -27187,25 +27187,26 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            console.log("API Response:", data); // Log the response data
-            if (Array.isArray(data.docs)) {
-                const movieFromApi = jsondata.map((doc)=>{
+            if (Array.isArray(data)) {
+                const moviesFromApi = data.map((movie)=>{
                     return {
-                        _id: doc._id,
-                        Title: doc.Title,
-                        ImagePath: doc.ImagePath,
-                        Description: doc.Description,
+                        _id: movie._id.$oid,
+                        Title: movie.Title,
+                        ImagePath: movie.ImagePath,
+                        Description: movie.Description,
                         Genre: {
-                            Name: doc.Genre.Name,
-                            Description: doc.Genre.Description
+                            Name: movie.Genre.Name,
+                            Description: movie.Genre.Description
                         },
                         Director: {
-                            Name: doc.Director.Name
+                            Name: movie.Director.Name
                         }
                     };
                 });
-                setMovies(movieFromApi);
+                setMovies(moviesFromApi);
             }
+        }).catch((error)=>{
+            console.error("Error fetching movies:", error);
         });
     }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -27213,7 +27214,7 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 38,
+        lineNumber: 39,
         columnNumber: 7
     }, undefined);
     if (movies.length > 0) // Render the list of movies
@@ -27225,12 +27226,12 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 50,
+                lineNumber: 51,
                 columnNumber: 11
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 48,
+        lineNumber: 49,
         columnNumber: 7
     }, undefined);
     // Handle the case when there are no movies
@@ -27238,7 +27239,7 @@ const MainView = ()=>{
         children: "The List is Really Empty"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 63,
+        lineNumber: 64,
         columnNumber: 10
     }, undefined);
 };
@@ -27559,7 +27560,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","prop-types":"7wKI2"}],"7wKI2":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"7wKI2":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *

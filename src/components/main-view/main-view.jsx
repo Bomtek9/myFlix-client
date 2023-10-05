@@ -5,31 +5,32 @@ import { MovieCard } from "../movie-card/movie-card";
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-
   useEffect(() => {
     fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
-        console.log("API Response:", data); // Log the response data
-        if (Array.isArray(data.docs)) {
-          const movieFromApi = jsondata.map((doc) => {
+        if (Array.isArray(data)) {
+          const moviesFromApi = data.map((movie) => {
             return {
-              _id: doc._id,
-              Title: doc.Title,
-              ImagePath: doc.ImagePath,
-              Description: doc.Description,
+              _id: movie._id.$oid, // Access the _id field within the nested object
+              Title: movie.Title,
+              ImagePath: movie.ImagePath,
+              Description: movie.Description,
               Genre: {
-                Name: doc.Genre.Name,
-                Description: doc.Genre.Description,
+                Name: movie.Genre.Name,
+                Description: movie.Genre.Description,
               },
               Director: {
-                Name: doc.Director.Name,
+                Name: movie.Director.Name,
               },
             };
           });
 
-          setMovies(movieFromApi);
+          setMovies(moviesFromApi);
         }
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
       });
   }, []);
 

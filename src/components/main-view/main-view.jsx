@@ -12,9 +12,7 @@ export const MainView = () => {
         if (Array.isArray(data)) {
           const moviesFromApi = data.map((movie) => {
             return {
-              _id: movie._id.$oid, // Access the _id field within the nested object
-              Title: movie.Title,
-              ImagePath: movie.ImagePath,
+              _id: movie._id.$oid,
               Description: movie.Description,
               Genre: {
                 Name: movie.Genre.Name,
@@ -22,7 +20,12 @@ export const MainView = () => {
               },
               Director: {
                 Name: movie.Director.Name,
+                Birth: movie.Director.Birth,
+                Death: movie.Director.Death,
               },
+              ImagePath: movie.ImagePath,
+              Featured: movie.Featured,
+              Title: movie.Title,
             };
           });
 

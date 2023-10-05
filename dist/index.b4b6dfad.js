@@ -27191,16 +27191,19 @@ const MainView = ()=>{
                 const moviesFromApi = data.map((movie)=>{
                     return {
                         _id: movie._id.$oid,
-                        Title: movie.Title,
-                        ImagePath: movie.ImagePath,
                         Description: movie.Description,
                         Genre: {
                             Name: movie.Genre.Name,
                             Description: movie.Genre.Description
                         },
                         Director: {
-                            Name: movie.Director.Name
-                        }
+                            Name: movie.Director.Name,
+                            Birth: movie.Director.Birth,
+                            Death: movie.Director.Death
+                        },
+                        ImagePath: movie.ImagePath,
+                        Featured: movie.Featured,
+                        Title: movie.Title
                     };
                 });
                 setMovies(moviesFromApi);
@@ -27214,7 +27217,7 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 39,
+        lineNumber: 42,
         columnNumber: 7
     }, undefined);
     if (movies.length > 0) // Render the list of movies
@@ -27226,12 +27229,12 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 51,
+                lineNumber: 54,
                 columnNumber: 11
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 49,
+        lineNumber: 52,
         columnNumber: 7
     }, undefined);
     // Handle the case when there are no movies
@@ -27239,7 +27242,7 @@ const MainView = ()=>{
         children: "The List is Really Empty"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 64,
+        lineNumber: 67,
         columnNumber: 10
     }, undefined);
 };

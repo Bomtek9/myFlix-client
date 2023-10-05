@@ -27183,64 +27183,68 @@ var _movieCard = require("../movie-card/movie-card");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            id: "64f22dad90ebac5592caf568",
-            Name: "It's A Wonderful Life",
-            Description: "An angel is sent from Heaven to help a desperately frustrated businessman, George Bailey, by showing him what life would have been like if he had never existed.",
-            ImagePath: "https://is1-ssl.mzstatic.com/image/thumb/Video49/v4/9b/f1/5b/9bf15b1d-1a2f-7fb3-c40a-1c0a1d8322ad/source/1200x630bb.jpg",
-            Featured: "true"
-        },
-        {
-            id: "64f2316590ebac5592caf56a",
-            Name: "Teenage Mutant Ninja Turtles",
-            Description: "Four teenage mutant ninja turtles Leonardo, Raphael, Donatello, and Michaelangelo fight crime in New York City from the shadows.",
-            ImagePath: "https://www.screengeek.net/wp-content/uploads/2019/03/teenage-mutant-ninja-turtles.jpg",
-            Featured: "true"
-        },
-        {
-            id: "64f21b4f90ebac5592caf561",
-            Name: "Interstellar",
-            Description: "When Earth becomes uninhibitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
-            ImagePath: "https://www.cinemahub.me/wp-content/uploads/2018/06/46590hd.jpg",
-            Featured: "true"
-        }
-    ]);
+    const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
+            console.log("API Response:", data); // Log the response data
+            if (Array.isArray(data.docs)) {
+                const movieFromApi = jsondata.map((doc)=>{
+                    return {
+                        _id: doc._id,
+                        Title: doc.Title,
+                        ImagePath: doc.ImagePath,
+                        Description: doc.Description,
+                        Genre: {
+                            Name: doc.Genre.Name,
+                            Description: doc.Genre.Description
+                        },
+                        Director: {
+                            Name: doc.Director.Name
+                        }
+                    };
+                });
+                setMovies(movieFromApi);
+            }
+        });
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 36,
-        columnNumber: 11
+        lineNumber: 38,
+        columnNumber: 7
     }, undefined);
-    if (movies.length == 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: "The List is Empty"
-    }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 42,
-        columnNumber: 15
-    }, undefined);
+    if (movies.length > 0) // Render the list of movies
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                 movie: movie,
                 onMovieClick: (newSelectedMovie)=>{
                     setSelectedMovie(newSelectedMovie);
                 }
-            }, movie.id, false, {
+            }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 48,
-                columnNumber: 15
+                lineNumber: 50,
+                columnNumber: 11
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 46,
-        columnNumber: 9
+        lineNumber: 48,
+        columnNumber: 7
+    }, undefined);
+    // Handle the case when there are no movies
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "The List is Really Empty"
+    }, void 0, false, {
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 63,
+        columnNumber: 10
     }, undefined);
 };
-_s(MainView, "X+To09rUWqeAgmqNCqlsAdVU1kQ=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
+exports.default = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
 

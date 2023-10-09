@@ -14,14 +14,21 @@ export const LoginView = ({ onloggedIn }) => {
 
     fetch("https://dup-movies-18ba622158fa.herokuapp.com/login", {
       method: "POST",
+      headers: { "Content-Type": application / json },
       body: JSON.stringify(data),
-    }).then((response) => {
-      if (response.ok) {
-        onloggedIn(username);
-      } else {
-        alert("Login Failed");
-      }
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Login response: ", data);
+        if (data.user) {
+          onLoggedIn(data.user, data.token);
+        } else {
+          alert("No such user");
+        }
+      })
+      .catch((e) => {
+        alert("Something went wrong");
+      });
   };
 
   return (

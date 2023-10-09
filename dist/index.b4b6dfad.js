@@ -27187,57 +27187,44 @@ const MainView = ()=>{
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     const [user, setUser] = (0, _react.useState)(null);
-    const [token, setToken] = (0, _react.useState)(null);
+    const [token, setToken] = (0, _react.useState)("");
     (0, _react.useEffect)(()=>{
-        if (user) // Fetch movies only if a user is logged in
-        fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            if (Array.isArray(data)) {
-                const moviesFromApi = data.map((movie)=>{
-                    return {
-                        _id: movie._id.$oid,
-                        Description: movie.Description,
-                        Genre: {
-                            Name: movie.Genre.Name,
-                            Description: movie.Genre.Description
-                        },
-                        Director: {
-                            Name: movie.Director.Name,
-                            Birth: movie.Director.Birth,
-                            Death: movie.Director.Death
-                        },
-                        ImagePath: movie.ImagePath,
-                        Featured: movie.Featured,
-                        Title: movie.Title
-                    };
-                });
-                setMovies(moviesFromApi);
+        if (token) // Fetch movies only when a token is available
+        fetch("https://myflixmoviedb.herokuapp.com/movies", {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
+        }).then((response)=>response.json()).then((data)=>{
+            if (Array.isArray(data)) setMovies(data);
         }).catch((error)=>{
             console.error("Error fetching movies:", error);
         });
     }, [
-        user
+        token
     ]);
+    const handleLogin = (loggedInUser, loggedInToken)=>{
+        setUser(loggedInUser);
+        setToken(loggedInToken);
+    };
     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-        onLoggedIn: (user, token)=>{
-            setUser(user);
-            setToken(token);
-        }
+        onLoggedIn: handleLogin
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 49,
-        columnNumber: 7
+        lineNumber: 36,
+        columnNumber: 12
     }, undefined);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 onClick: ()=>{
                     setUser(null);
+                    setToken("");
+                    setSelectedMovie(null);
                 },
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 61,
+                lineNumber: 42,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -27245,13 +27232,13 @@ const MainView = ()=>{
                 onBackClick: ()=>setSelectedMovie(null)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 68,
+                lineNumber: 51,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 60,
+        lineNumber: 41,
         columnNumber: 7
     }, undefined);
     if (movies.length > 0) // Render the list of movies
@@ -27260,11 +27247,12 @@ const MainView = ()=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 onClick: ()=>{
                     setUser(null);
+                    setToken("");
                 },
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 80,
+                lineNumber: 63,
                 columnNumber: 9
             }, undefined),
             movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
@@ -27274,13 +27262,13 @@ const MainView = ()=>{
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 88,
+                    lineNumber: 72,
                     columnNumber: 11
                 }, undefined))
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 79,
+        lineNumber: 62,
         columnNumber: 7
     }, undefined);
     // Handle the case when there are no movies
@@ -27289,22 +27277,23 @@ const MainView = ()=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 onClick: ()=>{
                     setUser(null);
+                    setToken("");
                 },
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 103,
+                lineNumber: 87,
                 columnNumber: 7
             }, undefined),
-            "The List is Empty"
+            "The List is Really Empty"
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 102,
+        lineNumber: 86,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "ld1mNqbzEgxPu9ZfASjBJ7ZrUMw=");
+_s(MainView, "89zYvvY1Z3Aq55HmWm7tepOP680=");
 _c = MainView;
 exports.default = MainView;
 var _c;

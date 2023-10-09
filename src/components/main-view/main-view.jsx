@@ -7,52 +7,33 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    if (user) {
-      // Fetch movies only if a user is logged in
-      fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies")
+    if (token) {
+      // Fetch movies only when a token is available
+      fetch("https://myflixmoviedb.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
         .then((response) => response.json())
         .then((data) => {
           if (Array.isArray(data)) {
-            const moviesFromApi = data.map((movie) => {
-              return {
-                _id: movie._id.$oid,
-                Description: movie.Description,
-                Genre: {
-                  Name: movie.Genre.Name,
-                  Description: movie.Genre.Description,
-                },
-                Director: {
-                  Name: movie.Director.Name,
-                  Birth: movie.Director.Birth,
-                  Death: movie.Director.Death,
-                },
-                ImagePath: movie.ImagePath,
-                Featured: movie.Featured,
-                Title: movie.Title,
-              };
-            });
-
-            setMovies(moviesFromApi);
+            setMovies(data);
           }
         })
         .catch((error) => {
           console.error("Error fetching movies:", error);
         });
     }
-  }, [user]);
+  }, [token]);
+
+  const handleLogin = (loggedInUser, loggedInToken) => {
+    setUser(loggedInUser);
+    setToken(loggedInToken);
+  };
 
   if (!user) {
-    return (
-      <LoginView
-        onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }}
-      />
-    );
+    return <LoginView onLoggedIn={handleLogin} />;
   }
 
   if (selectedMovie) {
@@ -61,6 +42,8 @@ export const MainView = () => {
         <button
           onClick={() => {
             setUser(null);
+            setToken("");
+            setSelectedMovie(null);
           }}
         >
           Logout
@@ -80,6 +63,7 @@ export const MainView = () => {
         <button
           onClick={() => {
             setUser(null);
+            setToken("");
           }}
         >
           Logout
@@ -103,11 +87,12 @@ export const MainView = () => {
       <button
         onClick={() => {
           setUser(null);
+          setToken("");
         }}
       >
         Logout
       </button>
-      The List is Empty
+      The List is Really Empty
     </div>
   );
 };

@@ -72,6 +72,13 @@ export const MainView = () => {
       </div>
     );
   }
+  <button
+    onClick={() => {
+      setUser(null);
+    }}
+  >
+    Logout
+  </button>;
 
   // Handle the case when there are no movies
   return <div>The List is Really Empty</div>;

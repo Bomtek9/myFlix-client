@@ -4,10 +4,12 @@ import { MovieCard } from "../movie-card/movie-card";
 import { LoginView } from "../login-view/login-view";
 
 export const MainView = () => {
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
+  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState("");
 
   useEffect(() => {
     if (token) {
@@ -84,15 +86,16 @@ export const MainView = () => {
   // Handle the case when there are no movies
   return (
     <div>
+      The List is Really Empty
       <button
         onClick={() => {
           setUser(null);
-          setToken("");
+          setToken(null);
+          localStorage.clear();
         }}
       >
         Logout
       </button>
-      The List is Really Empty
     </div>
   );
 };

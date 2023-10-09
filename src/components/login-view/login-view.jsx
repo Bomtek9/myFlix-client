@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const LoginView = () => {
+export const LoginView = ({ onloggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,9 +12,15 @@ export const LoginView = () => {
       secret: password,
     };
 
-    fetch("https://myflix-frontend-791a20b096d6.herokuapp.com/login", {
+    fetch("https://dup-movies-18ba622158fa.herokuapp.com/login", {
       method: "POST",
       body: JSON.stringify(data),
+    }).then((response) => {
+      if (response.ok) {
+        onloggedIn(username);
+      } else {
+        alert("Login Failed");
+      }
     });
   };
 

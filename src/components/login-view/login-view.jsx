@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const LoginView = ({ onloggedIn }) => {
+export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +14,7 @@ export const LoginView = ({ onloggedIn }) => {
 
     fetch("https://dup-movies-18ba622158fa.herokuapp.com/login", {
       method: "POST",
-      headers: { "Content-Type": application / json },
+      headers: { "Content-Type": "application/json" }, // Fixed the header format
       body: JSON.stringify(data),
     })
       .then((response) => response.json())

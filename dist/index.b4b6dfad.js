@@ -27194,12 +27194,12 @@ const MainView = ()=>{
     (0, _react.useEffect)(()=>{
         if (!token) return;
         // Fetch movies only when a token is available
-        fetch("https://myflixmoviedb.herokuapp.com/movies", {
+        fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then((response)=>response.json()).then((movies)=>{
-            if (Array.isArray(data)) setMovies(movies);
+        }).then((response)=>response.json()).then((data)=>{
+            if (Array.isArray(data)) setMovies(data);
         }).catch((error)=>{
             console.error("Error fetching movies:", error);
         });
@@ -27359,14 +27359,14 @@ const MovieView = ({ movie, onBackClick })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: " Name: "
+                        children: " Title: "
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 8,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.Name
+                        children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 9,
@@ -28404,8 +28404,8 @@ const LoginView = ({ onLoggedIn })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const loginData = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
         fetch("https://dup-movies-18ba622158fa.herokuapp.com/login", {
             method: "POST",

@@ -16,13 +16,13 @@ export const MainView = () => {
     if (!token) return;
     {
       // Fetch movies only when a token is available
-      fetch("https://myflixmoviedb.herokuapp.com/movies", {
+      fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
-        .then((movies) => {
+        .then((data) => {
           if (Array.isArray(data)) {
-            setMovies(movies);
+            setMovies(data);
           }
         })
         .catch((error) => {

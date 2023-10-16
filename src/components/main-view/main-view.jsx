@@ -13,15 +13,16 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    if (token) {
+    if (!token) return;
+    {
       // Fetch movies only when a token is available
       fetch("https://myflixmoviedb.herokuapp.com/movies", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
-        .then((data) => {
+        .then((movies) => {
           if (Array.isArray(data)) {
-            setMovies(data);
+            setMovies(movies);
           }
         })
         .catch((error) => {

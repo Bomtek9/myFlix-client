@@ -3,14 +3,13 @@ import { MainView } from "./components/main-view/main-view";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
   return (
-    <Container>
-      <div className="my-flix">
-        <MainView /> {/* Include the MainView component */}
-      </div>
+    <Container className="">
+      <MainView />
     </Container>
   );
 };

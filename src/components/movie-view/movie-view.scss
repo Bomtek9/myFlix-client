@@ -21,3 +21,24 @@
     height: 500px !important;
     object-fit: cover !important
 }
+.movie-view {
+    padding: 20px;
+    font-family: "Your Font", sans-serif; /* Change "Your Font" to your preferred font */
+    font-size: 18px; /* Change the font size as needed */
+  }
+  
+  .title {
+    margin-bottom: 10px; /* Add spacing between title and description */
+    margin-top: 10px;
+    font-weight: bold; /* Make the title bold */
+  }
+  
+  .description {
+    margin-bottom: 10px; /* Add spacing between description and director */
+  }
+  
+  .director {
+    font-style: italic; /* Make the director text italic */
+    margin-bottom: 20px;
+  }
+  

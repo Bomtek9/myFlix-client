@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Button, Row, Form, Card, Container, Col } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -37,30 +36,49 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          minLength="3"
-        />
-      </Form.Group>
+    <Container>
+      <Row>
+        <Col></Col>
+        <Col>
+          <Card style={{ marginTop: 100, marginBottom: 50, width: "350px" }}>
+            <Card.Header>Please Sign In</Card.Header>
+            <Card.Body>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    placeholder="Enter a Username"
+                    minLength="3"
+                  />
+                </Form.Group>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+                <Form.Group>
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter a Password"
+                    required
+                  />
+                </Form.Group>
+                <Button
+                  style={{ marginTop: 10 }}
+                  variant="primary"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col></Col>
+      </Row>
+    </Container>
   );
 };

@@ -9,7 +9,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Img
           variant="top"
           src={movie.ImagePath}
-          style={{ width: "100%", height: "300px" }}
+          style={{ width: "100%", height: "auto" }}
         />
         <Card.Body>
           {/* <Card.Title>{movie.Title}</Card.Title> */}

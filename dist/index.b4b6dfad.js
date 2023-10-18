@@ -27669,7 +27669,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                     src: movie.ImagePath,
                     style: {
                         width: "100%",
-                        height: "300px"
+                        height: "auto"
                     }
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",

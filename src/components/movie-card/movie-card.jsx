@@ -14,7 +14,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   const addFavoriteMovie = () => {
     fetch(
-      `https://movie-api-da5i.onrender.com/users/${user.name}/movies/${movie._id}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.name}/movies/${movie._id}`,
       { method: "POST", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -64,13 +64,13 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   return (
     <Card className="shadow p-4 border-0 h-100">
-      <Card.Img className="m-2" src={movie.image} />
+      <Card.Img className="m-2" src={movie.ImagePath} />
 
       <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.description}</Card.Text>
+        <Card.Title>{movie.Title}</Card.Title>
+        <Card.Text>{movie.Description}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-          <Button className="close-open-btn">Open</Button>
+          <Button className="more-info-button">More Info</Button>
         </Link>
 
         <Card.Body className="favorite-btns">

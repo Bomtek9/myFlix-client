@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Img from "../img/ghibli-logo.png";
 import "./navbar.scss";
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
@@ -26,16 +25,9 @@ function NavbarComponent({ user, onLoggedOut, movies, search, setSearch }) {
     >
       <Container className="align-bottom align-items-end align-content-end align-self-end navbar-style">
         {/* <Navbar.Brand href="#home"> */}
-        <img
-          alt=""
-          src={Img}
-          width="300px"
-          height=""
-          className="d-inline-block align-top"
-        />
 
         <Navbar.Brand className="align-bottom navbar-style">
-          Archive
+          Movie App
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

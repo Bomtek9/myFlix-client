@@ -21,7 +21,11 @@ const ProfileView = ({ user, token, movies, setUser }) => {
   const [birthday, setBirthday] = useState("");
 
   //creates an array with all the movies
-  let result = movies.filter((m) => user.favoriteMovies.includes(m._id));
+
+  let result = [];
+  if (user.favoriteMovies) {
+    result = movies.filter((m) => user.favoriteMovies.includes(m._id));
+  }
 
   //UPDATING PROFILE INFOS
   const handleUpdate = (event) => {
@@ -39,7 +43,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
     console.log(username);
 
     fetch(
-      `https://movies-api-render-0a0q.onrender.com/users/${user.username}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}`,
       {
         method: "PUT",
         headers: {
@@ -100,7 +104,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
               <Card className="mb-5 border border-0 card-custom">
                 <Card.Body>
                   <Card.Title>My Profile</Card.Title>
-                  <Card.Text>Want to change some infos?</Card.Text>
+                  <Card.Text>Please Sign Up</Card.Text>
                   <Form onSubmit={handleUpdate}>
                     <Form.Group>
                       <Form.Label>

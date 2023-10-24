@@ -7,6 +7,7 @@ import { Button, Col, Container, Nav, Row } from "react-bootstrap";
 import NavbarComponent from "../navbar/navbar.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProfileView from "../profile-view/profile-view";
+
 import "./main-view.scss";
 
 export const MainView = () => {
@@ -16,6 +17,7 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (!token) return;

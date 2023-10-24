@@ -1,14 +1,25 @@
-import { useState, useEffect } from "react";
-import { MovieView } from "../movie-view/movie-view";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Container } from "react-bootstrap";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Button, Col, Container, Nav, Row } from "react-bootstrap";
-import NavbarComponent from "../navbar/navbar.jsx";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProfileView from "../profile-view/profile-view";
+import NavbarComponent from "../navbar/navbar";
 
 import "./main-view.scss";
+
+const handleLogout = () => {
+  setUser(null);
+  setToken(null);
+  localStorage.clear();
+};
+
+const handleLoggedIn = (user, token) => {
+  setUser(user);
+  setToken(token);
+};
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -21,48 +32,34 @@ export const MainView = () => {
 
   useEffect(() => {
     if (!token) return;
-    {
-      // Fetch movies only when a token is available
-      fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
+
+    fetch("https://dup-movies-18ba622158fa.herokuapp.com/movies", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setMovies(data);
+        }
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (Array.isArray(data)) {
-            setMovies(data);
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching movies:", error);
-        });
-    }
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+      });
   }, [token]);
 
-  //new client router syntax
   const getSearchedMovies = (arr, query) => {
     return arr.filter((movie) => {
       return movie.Title.toLowerCase().includes(query.toLowerCase());
     });
   };
-  console.log(getSearchedMovies(movies, search));
 
   useEffect(() => {
     setFilteredMovies(getSearchedMovies(movies, search));
   }, [search, movies]);
 
   return (
-    <>
-      <NavbarComponent
-        user={user}
-        movies={movies}
-        search={search}
-        setSearch={setSearch}
-        onLoggedOut={() => {
-          setUser(null);
-          setToken(null);
-          localStorage.clear();
-        }}
-      />
+    <Container>
+      <NavbarComponent user={user} onLoggedOut={handleLogout} />
 
       <Row className="justify-content-center mb-5">
         <BrowserRouter>
@@ -70,39 +67,21 @@ export const MainView = () => {
             <Route
               path="/login"
               element={
-                <>
-                  {user ? (
-                    <Navigate to="/movies" />
-                  ) : (
-                    <LoginView
-                      onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                      }}
-                    />
-                  )}
-                </>
+                user ? (
+                  <Navigate to="/movies" />
+                ) : (
+                  <LoginView onLoggedIn={handleLoggedIn} />
+                )
               }
             />
             <Route
               path="/signup"
-              element={<>{user ? <Navigate to="/movies" /> : <SignupView />}</>}
+              element={user ? <Navigate to="/movies" /> : <SignupView />}
             />
             <Route
               path="/movies"
               element={
-                <>
-                  {filteredMovies.map((movie) => {
-                    return (
-                      <MovieCard
-                        movie={movie}
-                        token={token}
-                        setUser={setUser}
-                        user={user}
-                      />
-                    );
-                  })}
-                </>
+                <MoviesGrid filteredMovies={filteredMovies} token={token} />
               }
             />
             <Route
@@ -123,8 +102,18 @@ export const MainView = () => {
           </Routes>
         </BrowserRouter>
       </Row>
-    </>
+    </Container>
   );
 };
 
-export default MainView;
+const MoviesGrid = ({ filteredMovies, token, setUser, user }) => (
+  <Row xs={1} md={2} lg={4} className="g-4">
+    {filteredMovies.map((movie) => (
+      <Col key={movie._id}>
+        <MovieCard movie={movie} token={token} setUser={setUser} user={user} />
+      </Col>
+    ))}
+  </Row>
+);
+
+// Add your PropTypes, styling, and other code as needed

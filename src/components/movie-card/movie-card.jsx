@@ -8,7 +8,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
+    if (user?.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
       setIsFavorite(true);
     }
   }, [user]);
@@ -69,22 +69,22 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
-        {/* <Card.Text>{movie.Description}</Card.Text> */}
-        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-          <Button className="more-info-button">More Info</Button>
-        </Link>
-
-        <Card.Body className="favorite-btn">
-          {!isFavorite ? (
-            <Button className="fav-btn" onClick={addFavoriteMovie}>
-              + Favorite
-            </Button>
-          ) : (
-            <Button className="fav-btn" onClick={removeFavoriteMovie}>
-              - Remove
-            </Button>
-          )}
-        </Card.Body>
+        <div className="d-flex justify-content-between align-items-center">
+          <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+            <Button className="more-info-button">More Info</Button>
+          </Link>
+          <div className="favorite-btn">
+            {!isFavorite ? (
+              <Button className="fav-btn" onClick={addFavoriteMovie}>
+                + Favorite
+              </Button>
+            ) : (
+              <Button className="fav-btn" onClick={removeFavoriteMovie}>
+                - Remove
+              </Button>
+            )}
+          </div>
+        </div>
       </Card.Body>
     </Card>
   );

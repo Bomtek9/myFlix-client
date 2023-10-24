@@ -177,7 +177,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
                       onClick={deleteAccount}
                       className="text-white mt-3"
                     >
-                      delete your account
+                      delete account
                     </Button>
                   </Link>
                 </Card.Body>

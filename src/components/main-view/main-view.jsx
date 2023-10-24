@@ -64,7 +64,7 @@ export const MainView = () => {
         }}
       />
 
-      <Row className="margin-top-custom justify-content-center mb-5">
+      <Row className="justify-content-center mb-5">
         <BrowserRouter>
           <Routes>
             <Route

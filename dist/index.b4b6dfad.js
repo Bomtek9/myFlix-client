@@ -27250,7 +27250,7 @@ const MainView = ()=>{
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
-                className: "margin-top-custom justify-content-center mb-5",
+                className: "justify-content-center mb-5",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
                         children: [
@@ -27379,6 +27379,10 @@ const MovieView = ({ movies })=>{
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                     md: "4",
+                    style: {
+                        marginTop: 10,
+                        marginBottom: 10
+                    },
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
                         className: "ImagePath",
                         src: movie.ImagePath,
@@ -27402,6 +27406,13 @@ const MovieView = ({ movies })=>{
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 20,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
+                                children: movie.Description
+                            }, void 0, false, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 21,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
@@ -27441,7 +27452,7 @@ const MovieView = ({ movies })=>{
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                                to: "/",
+                                to: "/movies",
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                     className: "close-open-btn",
                                     children: "Back"
@@ -47798,6 +47809,7 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _react = require("react");
+var _movieCardScss = require("./movie-card.scss");
 var _s = $RefreshSig$();
 const MovieCard = ({ movie, token, setUser, user })=>{
     _s();
@@ -47855,20 +47867,13 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                 src: movie.ImagePath
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 67,
+                lineNumber: 68,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Title, {
                         children: movie.Title
-                    }, void 0, false, {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 70,
-                        columnNumber: 9
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
-                        children: movie.Description
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
                         lineNumber: 71,
@@ -47881,48 +47886,48 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "More Info"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 73,
+                            lineNumber: 74,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 72,
+                        lineNumber: 73,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
-                        className: "favorite-btns",
+                        className: "favorite-btn",
                         children: !isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             className: "fav-btn",
                             onClick: addFavoriteMovie,
-                            children: "+"
+                            children: "+ Favorite"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 78,
+                            lineNumber: 79,
                             columnNumber: 13
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             className: "fav-btn",
                             onClick: removeFavoriteMovie,
-                            children: "-"
+                            children: "- Remove"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 82,
+                            lineNumber: 83,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 76,
+                        lineNumber: 77,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 69,
+                lineNumber: 70,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 66,
+        lineNumber: 67,
         columnNumber: 5
     }, undefined);
 };
@@ -47943,7 +47948,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9YtA0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./movie-card.scss":"d6HH4"}],"d6HH4":[function() {},{}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -48792,7 +48797,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                                 type: "",
                                                 onClick: deleteAccount,
                                                 className: "text-white mt-3",
-                                                children: "delete your account"
+                                                children: "delete account"
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
                                                 lineNumber: 174,

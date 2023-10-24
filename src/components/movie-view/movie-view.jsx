@@ -1,28 +1,36 @@
-import "./movie-view.scss";
+import { Button, Card, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
+  const movie = movies.find((movie) => movie._id === movieId);
+
+  console.log(movieId);
+
   return (
-    <div className="movie-view">
-      <img src={movie.ImagePath} style={{ width: "250px", height: "350px" }} />
-      <div className="title">
-        <span> Title: </span>
-        <span>{movie.Title}</span>
-      </div>
-      <div className="description">
-        <span>Description: </span>
-        <span>{movie.Description}</span>
-      </div>
-      <div className="director">
-        <span>Director: </span>
-        <span>{movie.Director.Name}</span>
-      </div>
-      <button
-        onClick={onBackClick}
-        style={{ cursor: "pointer" }}
-        className="back-button"
-      >
-        Back
-      </button>
-    </div>
+    <Card className="shadow p-4 border-0">
+      <Row>
+        <Col md="4">
+          <Card.Img className=" movie-view-img" src={movie.image} alt="" />
+        </Col>
+        <Col>
+          <Card.Body>
+            <Card.Title className="mt-2">{movie.Title}</Card.Title>
+            <Card.Text>{movie.Description}</Card.Text>
+            <Card.Text>
+              <span className="text-title">Genre:</span> {movie.Genre.Name}
+            </Card.Text>
+            <Card.Text>
+              <span className="text-title">Director:</span>{" "}
+              {movie.Director.Name}
+            </Card.Text>
+            <Link to="/">
+              <Button className="close-open-btn">Back</Button>
+            </Link>
+          </Card.Body>
+        </Col>
+      </Row>
+    </Card>
   );
 };

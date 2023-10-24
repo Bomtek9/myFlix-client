@@ -6,11 +6,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   return (
     <Col style={{ marginTop: 10, marginBottom: 10 }}>
       <Card>
-        <Card.Img
-          variant="top"
-          src={movie.ImagePath}
-          style={{ width: "100%", height: "auto" }}
-        />
+        <Card.Img variant="top" src={movie.ImagePath} className="img-style" />
         <Card.Body>
           {/* <Card.Title>{movie.Title}</Card.Title> */}
           {/* <Card.Text>{movie.Description}</Card.Text> */}

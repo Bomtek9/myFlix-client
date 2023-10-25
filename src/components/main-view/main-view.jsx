@@ -11,9 +11,10 @@ import NavbarComponent from "../navbar/navbar";
 import "./main-view.scss";
 
 const handleLogout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
   setUser(null);
   setToken(null);
-  localStorage.clear();
 };
 
 const handleLoggedIn = (user, token) => {
@@ -64,6 +65,7 @@ export const MainView = () => {
       <Row className="justify-content-center mb-5">
         <BrowserRouter>
           <Routes>
+            {/* Updated Routes Configuration */}
             <Route
               path="/login"
               element={
@@ -81,7 +83,15 @@ export const MainView = () => {
             <Route
               path="/movies"
               element={
-                <MoviesGrid filteredMovies={filteredMovies} token={token} />
+                user ? (
+                  <MoviesGrid
+                    filteredMovies={filteredMovies}
+                    token={token}
+                    user={user}
+                  />
+                ) : (
+                  <Navigate to="/login" />
+                )
               }
             />
             <Route
@@ -91,12 +101,23 @@ export const MainView = () => {
             <Route
               path="/profile"
               element={
-                <ProfileView
-                  user={user}
-                  token={token}
-                  movies={movies}
-                  setUser={setUser}
-                />
+                user ? (
+                  <ProfileView
+                    user={user}
+                    token={token}
+                    movies={movies}
+                    setUser={setUser}
+                  />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            {/* Default Route for other cases */}
+            <Route
+              path="/*"
+              element={
+                user ? <Navigate to="/movies" /> : <Navigate to="/login" />
               }
             />
           </Routes>
@@ -115,5 +136,3 @@ const MoviesGrid = ({ filteredMovies, token, setUser, user }) => (
     ))}
   </Row>
 );
-
-// Add your PropTypes, styling, and other code as needed

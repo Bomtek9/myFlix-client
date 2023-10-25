@@ -14,6 +14,11 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   }, [user]);
 
   const addFavoriteMovie = () => {
+    if (!user) {
+      console.error("User is not defined.");
+      return;
+    }
+
     fetch(
       `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.name}/movies/${movie._id}`,
       { method: "POST", headers: { Authorization: `Bearer ${token}` } }
@@ -92,8 +97,8 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
   }).isRequired,
 };

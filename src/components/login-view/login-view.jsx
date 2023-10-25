@@ -7,6 +7,7 @@ export const LoginView = ({ onLoggedIn }) => {
   const [error, setError] = useState(null);
 
   const handleSubmit = (event) => {
+    console.log("Form submitted");
     event.preventDefault();
 
     const loginData = {

@@ -10,19 +10,19 @@ import NavbarComponent from "../navbar/navbar";
 
 import "./main-view.scss";
 
-const handleLogout = () => {
-  localStorage.removeItem("user");
-  localStorage.removeItem("token");
-  setUser(null);
-  setToken(null);
-};
-
-const handleLoggedIn = (user, token) => {
-  setUser(user);
-  setToken(token);
-};
-
 export const MainView = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);
+    setToken(null);
+  };
+
+  const handleLoggedIn = (user, token) => {
+    setUser(user);
+    setToken(token);
+  };
+
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser ? storedUser : null);
@@ -102,12 +102,7 @@ export const MainView = () => {
               path="/profile"
               element={
                 user ? (
-                  <ProfileView
-                    user={user}
-                    token={token}
-                    movies={movies}
-                    setUser={setUser}
-                  />
+                  <ProfileView user={user} token={token} movies={movies} />
                 ) : (
                   <Navigate to="/login" />
                 )
@@ -127,11 +122,11 @@ export const MainView = () => {
   );
 };
 
-const MoviesGrid = ({ filteredMovies, token, setUser, user }) => (
+const MoviesGrid = ({ filteredMovies, token }) => (
   <Row xs={1} md={2} lg={4} className="g-4">
     {filteredMovies.map((movie) => (
       <Col key={movie._id}>
-        <MovieCard movie={movie} token={token} setUser={setUser} user={user} />
+        <MovieCard movie={movie} token={token} />
       </Col>
     ))}
   </Row>

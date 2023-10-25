@@ -20,7 +20,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
     }
 
     fetch(
-      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.name}/movies/${movie._id}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
       { method: "POST", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -32,7 +32,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
       })
       .then((user) => {
         if (user) {
-          alert("successfully added to favorites");
+          alert("Successfully added to favorites");
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
           setIsFavorite(true);
@@ -45,7 +45,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   const removeFavoriteMovie = () => {
     fetch(
-      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.name}/movies/${movie._id}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
       { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {

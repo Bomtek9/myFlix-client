@@ -82,17 +82,7 @@ export const MainView = () => {
             />
             <Route
               path="/movies"
-              element={
-                user ? (
-                  <MoviesGrid
-                    filteredMovies={filteredMovies}
-                    token={token}
-                    user={user}
-                  />
-                ) : (
-                  <Navigate to="/login" />
-                )
-              }
+              element={<MoviesGrid filteredMovies={filteredMovies} />}
             />
             <Route
               path="/movies/:movieId"
@@ -122,11 +112,11 @@ export const MainView = () => {
   );
 };
 
-const MoviesGrid = ({ filteredMovies, token }) => (
+const MoviesGrid = ({ filteredMovies, token, user }) => (
   <Row xs={1} md={2} lg={4} className="g-4">
     {filteredMovies.map((movie) => (
       <Col key={movie._id}>
-        <MovieCard movie={movie} token={token} />
+        <MovieCard movie={movie} token={token} user={user} />
       </Col>
     ))}
   </Row>

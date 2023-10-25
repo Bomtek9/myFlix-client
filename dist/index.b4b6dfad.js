@@ -27279,12 +27279,8 @@ const MainView = ()=>{
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                                 path: "/movies",
-                                element: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MoviesGrid, {
-                                    filteredMovies: filteredMovies,
-                                    token: token,
-                                    user: user
-                                }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
-                                    to: "/login"
+                                element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MoviesGrid, {
+                                    filteredMovies: filteredMovies
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
@@ -27298,7 +27294,7 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 97,
+                                lineNumber: 87,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27312,7 +27308,7 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 101,
+                                lineNumber: 91,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27324,7 +27320,7 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 112,
+                                lineNumber: 102,
                                 columnNumber: 13
                             }, undefined)
                         ]
@@ -27352,7 +27348,7 @@ const MainView = ()=>{
 };
 _s(MainView, "eDHKG4pPSLucXvHTQntsvJajN8s=");
 _c = MainView;
-const MoviesGrid = ({ filteredMovies, token })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+const MoviesGrid = ({ filteredMovies, token, user })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
         xs: 1,
         md: 2,
         lg: 4,
@@ -27360,20 +27356,21 @@ const MoviesGrid = ({ filteredMovies, token })=>/*#__PURE__*/ (0, _jsxDevRuntime
         children: filteredMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                     movie: movie,
-                    token: token
+                    token: token,
+                    user: user
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 129,
+                    lineNumber: 119,
                     columnNumber: 9
                 }, undefined)
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 128,
+                lineNumber: 118,
                 columnNumber: 7
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 126,
+        lineNumber: 116,
         columnNumber: 3
     }, undefined);
 _c1 = MoviesGrid;
@@ -47857,7 +47854,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
             console.error("User is not defined.");
             return;
         }
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.name}/movies/${movie._id}`, {
+        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -47867,7 +47864,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
             else console.log("Failed to add fav movie");
         }).then((user)=>{
             if (user) {
-                alert("successfully added to favorites");
+                alert("Successfully added to favorites");
                 localStorage.setItem("user", JSON.stringify(user));
                 setUser(user);
                 setIsFavorite(true);
@@ -47877,7 +47874,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
         });
     };
     const removeFavoriteMovie = ()=>{
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.name}/movies/${movie._id}`, {
+        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`

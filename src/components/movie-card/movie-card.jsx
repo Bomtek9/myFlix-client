@@ -1,17 +1,20 @@
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Card, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "./movie-card.scss";
+import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
-export const MovieCard = ({ movie, token, setUser, user }) => {
+export const MovieCard = ({ movie, token, user, setUser }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (user?.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
+    if (
+      user &&
+      user.favoriteMovies &&
+      user.favoriteMovies.includes(movie._id)
+    ) {
       setIsFavorite(true);
     }
-  }, [user]);
+  }, [user, movie._id]);
 
   const addFavoriteMovie = () => {
     if (!user) {
@@ -20,7 +23,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
     }
 
     fetch(
-      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites/${movie._id}`,
       { method: "POST", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -30,11 +33,11 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
           console.log("Failed to add fav movie");
         }
       })
-      .then((user) => {
-        if (user) {
+      .then((updatedUser) => {
+        if (updatedUser) {
           alert("Successfully added to favorites");
-          localStorage.setItem("user", JSON.stringify(user));
-          setUser(user);
+          localStorage.setItem("user", JSON.stringify(updatedUser));
+          setUser(updatedUser);
           setIsFavorite(true);
         }
       })
@@ -45,7 +48,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   const removeFavoriteMovie = () => {
     fetch(
-      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites/${movie._id}`,
       { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -55,11 +58,11 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
           alert("Failed");
         }
       })
-      .then((user) => {
-        if (user) {
-          alert("successfully deleted from favorites");
-          localStorage.setItem("user", JSON.stringify(user));
-          setUser(user);
+      .then((updatedUser) => {
+        if (updatedUser) {
+          alert("Successfully removed from favorites");
+          localStorage.setItem("user", JSON.stringify(updatedUser));
+          setUser(updatedUser);
           setIsFavorite(false);
         }
       })
@@ -70,8 +73,9 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   return (
     <Card className="shadow p-4 border-0 h-100">
-      <Card.Img className="m-2" src={movie.ImagePath} />
-
+      <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+        <Card.Img className="m-2" src={movie.ImagePath} />
+      </Link>
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <div className="d-flex justify-content-between align-items-center">
@@ -79,13 +83,13 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
             <Button className="more-info-button">More Info</Button>
           </Link>
           <div className="favorite-btn">
-            {!isFavorite ? (
-              <Button className="fav-btn" onClick={addFavoriteMovie}>
-                + Favorite
-              </Button>
-            ) : (
+            {isFavorite ? (
               <Button className="fav-btn" onClick={removeFavoriteMovie}>
                 - Remove
+              </Button>
+            ) : (
+              <Button className="fav-btn" onClick={addFavoriteMovie}>
+                + Favorite
               </Button>
             )}
           </div>
@@ -101,4 +105,6 @@ MovieCard.propTypes = {
     ImagePath: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
   }).isRequired,
+  user: PropTypes.object,
+  setUser: PropTypes.func,
 };

@@ -27280,7 +27280,10 @@ const MainView = ()=>{
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                                 path: "/movies",
                                 element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MoviesGrid, {
-                                    filteredMovies: filteredMovies
+                                    filteredMovies: filteredMovies,
+                                    token: token,
+                                    user: user,
+                                    setUser: setUser
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
@@ -27294,7 +27297,7 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 87,
+                                lineNumber: 95,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27308,7 +27311,7 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 91,
+                                lineNumber: 99,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27320,7 +27323,7 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 102,
+                                lineNumber: 110,
                                 columnNumber: 13
                             }, undefined)
                         ]
@@ -27348,7 +27351,7 @@ const MainView = ()=>{
 };
 _s(MainView, "eDHKG4pPSLucXvHTQntsvJajN8s=");
 _c = MainView;
-const MoviesGrid = ({ filteredMovies, token, user })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+const MoviesGrid = ({ filteredMovies, token, user, setUser })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
         xs: 1,
         md: 2,
         lg: 4,
@@ -27357,20 +27360,21 @@ const MoviesGrid = ({ filteredMovies, token, user })=>/*#__PURE__*/ (0, _jsxDevR
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                     movie: movie,
                     token: token,
-                    user: user
+                    user: user,
+                    setUser: setUser
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 119,
+                    lineNumber: 127,
                     columnNumber: 9
                 }, undefined)
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 118,
+                lineNumber: 126,
                 columnNumber: 7
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 116,
+        lineNumber: 124,
         columnNumber: 3
     }, undefined);
 _c1 = MoviesGrid;
@@ -47834,27 +47838,28 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
-var _reactRouterDom = require("react-router-dom");
-var _react = require("react");
-var _movieCardScss = require("./movie-card.scss");
+var _reactRouterDom = require("react-router-dom"); // Import Link from react-router-dom
 var _s = $RefreshSig$();
-const MovieCard = ({ movie, token, setUser, user })=>{
+const MovieCard = ({ movie, token, user, setUser })=>{
     _s();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
-        if (user?.favoriteMovies && user.favoriteMovies.includes(movie._id)) setIsFavorite(true);
+        if (user && user.favoriteMovies && user.favoriteMovies.includes(movie._id)) setIsFavorite(true);
     }, [
-        user
+        user,
+        movie._id
     ]);
     const addFavoriteMovie = ()=>{
         if (!user) {
             console.error("User is not defined.");
             return;
         }
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites/${movie._id}`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -47862,11 +47867,11 @@ const MovieCard = ({ movie, token, setUser, user })=>{
         }).then((response)=>{
             if (response.ok) return response.json();
             else console.log("Failed to add fav movie");
-        }).then((user)=>{
-            if (user) {
+        }).then((updatedUser)=>{
+            if (updatedUser) {
                 alert("Successfully added to favorites");
-                localStorage.setItem("user", JSON.stringify(user));
-                setUser(user);
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setUser(updatedUser);
                 setIsFavorite(true);
             }
         }).catch((error)=>{
@@ -47874,7 +47879,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
         });
     };
     const removeFavoriteMovie = ()=>{
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites/${movie._id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -47882,11 +47887,11 @@ const MovieCard = ({ movie, token, setUser, user })=>{
         }).then((response)=>{
             if (response.ok) return response.json();
             else alert("Failed");
-        }).then((user)=>{
-            if (user) {
-                alert("successfully deleted from favorites");
-                localStorage.setItem("user", JSON.stringify(user));
-                setUser(user);
+        }).then((updatedUser)=>{
+            if (updatedUser) {
+                alert("Successfully removed from favorites");
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setUser(updatedUser);
                 setIsFavorite(false);
             }
         }).catch((error)=>{
@@ -47896,12 +47901,19 @@ const MovieCard = ({ movie, token, setUser, user })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "shadow p-4 border-0 h-100",
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
-                className: "m-2",
-                src: movie.ImagePath
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                to: `/movies/${encodeURIComponent(movie._id)}`,
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
+                    className: "m-2",
+                    src: movie.ImagePath
+                }, void 0, false, {
+                    fileName: "src/components/movie-card/movie-card.jsx",
+                    lineNumber: 77,
+                    columnNumber: 9
+                }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 73,
+                lineNumber: 76,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -47910,7 +47922,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 76,
+                        lineNumber: 80,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -47923,25 +47935,17 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                                     children: "More Info"
                                 }, void 0, false, {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 79,
+                                    lineNumber: 83,
                                     columnNumber: 13
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 78,
+                                lineNumber: 82,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 className: "favorite-btn",
-                                children: !isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                                    className: "fav-btn",
-                                    onClick: addFavoriteMovie,
-                                    children: "+ Favorite"
-                                }, void 0, false, {
-                                    fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 83,
-                                    columnNumber: 15
-                                }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                children: isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                     className: "fav-btn",
                                     onClick: removeFavoriteMovie,
                                     children: "- Remove"
@@ -47949,28 +47953,36 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                                     fileName: "src/components/movie-card/movie-card.jsx",
                                     lineNumber: 87,
                                     columnNumber: 15
+                                }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                    className: "fav-btn",
+                                    onClick: addFavoriteMovie,
+                                    children: "+ Favorite"
+                                }, void 0, false, {
+                                    fileName: "src/components/movie-card/movie-card.jsx",
+                                    lineNumber: 91,
+                                    columnNumber: 15
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 81,
+                                lineNumber: 85,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 77,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 75,
+                lineNumber: 79,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 72,
+        lineNumber: 75,
         columnNumber: 5
     }, undefined);
 };
@@ -47981,7 +47993,9 @@ MovieCard.propTypes = {
         Title: (0, _propTypesDefault.default).string.isRequired,
         ImagePath: (0, _propTypesDefault.default).string.isRequired,
         Description: (0, _propTypesDefault.default).string.isRequired
-    }).isRequired
+    }).isRequired,
+    user: (0, _propTypesDefault.default).object,
+    setUser: (0, _propTypesDefault.default).func
 };
 var _c;
 $RefreshReg$(_c, "MovieCard");
@@ -47991,7 +48005,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./movie-card.scss":"d6HH4"}],"d6HH4":[function() {},{}],"9YtA0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap":"3AD9A","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-router-dom":"9xmpe"}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

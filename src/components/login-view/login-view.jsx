@@ -7,6 +7,7 @@ export const LoginView = ({ onLoggedIn }) => {
   const [error, setError] = useState(null);
 
   const handleSubmit = (event) => {
+    console.log("Form submitted");
     event.preventDefault();
 
     const loginData = {
@@ -20,18 +21,22 @@ export const LoginView = ({ onLoggedIn }) => {
       body: JSON.stringify(loginData),
     })
       .then((response) => {
+        console.log("Response received");
         if (!response.ok) {
           throw new Error("Login failed");
         }
         return response.json();
       })
       .then((data) => {
+        console.log("Login successful, data:", data);
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
+        // Check if onLoggedIn is called
         onLoggedIn(data.user, data.token);
       })
       .catch((e) => {
         setError("Login failed. Please check your credentials.");
+        console.error("Error during login:", e);
       });
   };
 

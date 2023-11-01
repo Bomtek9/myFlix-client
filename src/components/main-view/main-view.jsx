@@ -60,7 +60,12 @@ export const MainView = () => {
 
   return (
     <Container>
-      <NavbarComponent user={user} onLoggedOut={handleLogout} />
+      <NavbarComponent
+        user={user}
+        onLoggedOut={handleLogout}
+        movies={movies}
+        setSearch={setSearch}
+      />
 
       <Row className="justify-content-center mb-5">
         <BrowserRouter>

@@ -108,3 +108,5 @@ MovieCard.propTypes = {
   user: PropTypes.object,
   setUser: PropTypes.func,
 };
+
+export default MovieCard;

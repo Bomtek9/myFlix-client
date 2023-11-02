@@ -47,7 +47,7 @@ export const SignupView = () => {
     <Container>
       <Row>
         <Col></Col>
-        <Col>
+        <Col md={{ span: 6, offset: 3 }} className="mx-auto">
           <Card style={{ marginTop: 75, marginBottom: 50, width: "350px" }}>
             <Card.Header>Please Sign Up</Card.Header>
             <Card.Body>

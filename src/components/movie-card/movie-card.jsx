@@ -80,7 +80,9 @@ export const MovieCard = ({ movie, token, user, setUser }) => {
         <Card.Title>{movie.Title}</Card.Title>
         <div className="d-flex justify-content-between align-items-center">
           <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-            <Button className="more-info-button">More Info</Button>
+            <div className="button-container">
+              <Button className="more-info-button">More Info</Button>
+            </div>
           </Link>
           <div className="favorite-btn">
             {isFavorite ? (

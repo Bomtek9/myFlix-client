@@ -77,12 +77,10 @@ export const MovieCard = ({ movie, token, user, setUser }) => {
         <Card.Img className="m-2" src={movie.ImagePath} />
       </Link>
       <Card.Body>
-        {/* <Card.Title>{movie.Title}</Card.Title> */}
+        <Card.Title>{movie.Title}</Card.Title>
         <div className="d-flex justify-content-between align-items-center">
           <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-            <div className="button-container">
-              <Button className="more-info-button">More Info</Button>
-            </div>
+            <Button className="more-info-button">More Info</Button>
           </Link>
           <div className="favorite-btn">
             {isFavorite ? (

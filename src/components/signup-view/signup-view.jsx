@@ -45,10 +45,9 @@ export const SignupView = () => {
 
   return (
     <Container>
-      <Row>
-        <Col></Col>
-        <Col md={{ span: 6, offset: 3 }} className="mx-auto">
-          <Card style={{ marginTop: 75, marginBottom: 50, width: "350px" }}>
+      <Row className="vh-100 justify-content-center align-items-center">
+        <Col md="4">
+          <Card style={{ width: "350px" }}>
             <Card.Header>Please Sign Up</Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit}>

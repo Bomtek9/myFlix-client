@@ -45,9 +45,8 @@ export const SignupView = () => {
 
   return (
     <Container>
-      <Row>
-        <Col></Col>
-        <Col>
+      <Row className="justify-content-center">
+        <Col md={6}>
           <Card style={{ marginTop: 100, marginBottom: 50, width: "350px" }}>
             <Card.Header>Please Sign Up</Card.Header>
             <Card.Body>

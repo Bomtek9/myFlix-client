@@ -78,7 +78,9 @@ export const SignupView = () => {
                     required
                     placeholder="Enter a Username"
                   />
-                  <span className="error">{usernameError}</span>
+                  {usernameError && (
+                    <span className="error">{usernameError}</span>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="formPassword">
@@ -90,7 +92,9 @@ export const SignupView = () => {
                     required
                     placeholder="Enter a Password"
                   />
-                  <span className="error">{passwordError}</span>
+                  {passwordError && (
+                    <span className="error">{passwordError}</span>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="formEmail">

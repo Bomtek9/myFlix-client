@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, token, user, setUser }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (
-      user &&
-      user.favoriteMovies &&
-      user.favoriteMovies.includes(movie._id)
-    ) {
-      setIsFavorite(true);
+    if (user && user.FavoriteMovies) {
+      setIsFavorite(user.FavoriteMovies.includes(movie._id));
     }
   }, [user, movie._id]);
 
-  const addFavoriteMovie = () => {
-    if (!user) {
-      console.error("User is not defined.");
+  const handleFavoriteClick = () => {
+    if (!user || !user.FavoriteMovies) {
+      console.error("User is not defined or does not have FavoriteMovies.");
       return;
     }
 
+    if (isFavorite) {
+      removeFavoriteMovie();
+    } else {
+      addFavoriteMovie();
+    }
+  };
+
+  const addFavoriteMovie = () => {
     fetch(
       `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites/${movie._id}`,
       { method: "POST", headers: { Authorization: `Bearer ${token}` } }
@@ -30,15 +34,17 @@ export const MovieCard = ({ movie, token, user, setUser }) => {
         if (response.ok) {
           return response.json();
         } else {
-          console.log("Failed to add fav movie");
+          console.log("Failed to add favorite movie");
         }
       })
       .then((updatedUser) => {
-        if (updatedUser) {
+        if (updatedUser && updatedUser.FavoriteMovies) {
           alert("Successfully added to favorites");
           localStorage.setItem("user", JSON.stringify(updatedUser));
           setUser(updatedUser);
           setIsFavorite(true);
+        } else {
+          console.error("Invalid user data received.");
         }
       })
       .catch((error) => {
@@ -55,15 +61,17 @@ export const MovieCard = ({ movie, token, user, setUser }) => {
         if (response.ok) {
           return response.json();
         } else {
-          alert("Failed");
+          alert("Failed to remove favorite movie");
         }
       })
       .then((updatedUser) => {
-        if (updatedUser) {
+        if (updatedUser && updatedUser.FavoriteMovies) {
           alert("Successfully removed from favorites");
           localStorage.setItem("user", JSON.stringify(updatedUser));
           setUser(updatedUser);
           setIsFavorite(false);
+        } else {
+          console.error("Invalid user data received.");
         }
       })
       .catch((error) => {
@@ -77,21 +85,14 @@ export const MovieCard = ({ movie, token, user, setUser }) => {
         <Card.Img className="m-2" src={movie.ImagePath} />
       </Link>
       <Card.Body>
-        {/* <Card.Title>{movie.Title}</Card.Title> */}
         <div className="d-flex justify-content-between align-items-center">
           <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
             <Button className="more-info-button">More Info</Button>
           </Link>
           <div className="favorite-btn">
-            {isFavorite ? (
-              <Button className="fav-btn" onClick={removeFavoriteMovie}>
-                - Remove
-              </Button>
-            ) : (
-              <Button className="fav-btn" onClick={addFavoriteMovie}>
-                + Favorite
-              </Button>
-            )}
+            <Button className="fav-btn" onClick={handleFavoriteClick}>
+              {isFavorite ? "- Remove" : "+ Favorite"}
+            </Button>
           </div>
         </div>
       </Card.Body>
@@ -107,6 +108,7 @@ MovieCard.propTypes = {
   }).isRequired,
   user: PropTypes.object,
   setUser: PropTypes.func,
+  token: PropTypes.string,
 };
 
 export default MovieCard;

@@ -48555,7 +48555,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
         if (user && user.favoriteMovies) // Use the user's ID or username to fetch favorite movies
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}/favorites`, {
+        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -48587,7 +48587,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
         //DEBUG
         console.log(JSON.stringify(data));
         console.log(username);
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}`, {
+        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -48611,7 +48611,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
     };
     //DELETE ACCOUNT
     const deleteAccount = ()=>{
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}`, {
+        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}`, {
             method: "DELETE",
             headers: {
                 // "Content-Type": "application/json",

@@ -25,7 +25,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
     if (user && user.favoriteMovies) {
       // Use the user's ID or username to fetch favorite movies
       fetch(
-        `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}/favorites`,
+        `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites`,
         {
           method: "GET",
           headers: {
@@ -72,7 +72,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
     console.log(username);
 
     fetch(
-      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}`,
       {
         method: "PUT",
         headers: {
@@ -102,7 +102,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
   //DELETE ACCOUNT
   const deleteAccount = () => {
     fetch(
-      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}`,
+      `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}`,
       {
         method: "DELETE",
         headers: {

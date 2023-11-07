@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -12,9 +12,6 @@ import { Link } from "react-router-dom";
 import MovieCard from "../movie-card/movie-card";
 
 const ProfileView = ({ user, token, movies, setUser }) => {
-  //   const userBday = user.birthday.toDateString();
-  //   console.log(token);
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -22,30 +19,31 @@ const ProfileView = ({ user, token, movies, setUser }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   useEffect(() => {
-    if (user && user.favoriteMovies) {
-      fetch(
-        `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            console.error("Failed to fetch favorite movies");
+    async function fetchFavoriteMovies() {
+      try {
+        const response = await fetch(
+          `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        })
-        .then((data) => {
-          console.log("Fetched favorite movies:", data);
+        );
+
+        if (response.ok) {
+          const data = await response.json();
           setFavoriteMovies(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching favorite movies:", error);
-        });
+        } else {
+          console.error("Failed to fetch favorite movies");
+        }
+      } catch (error) {
+        console.error("Error fetching favorite movies:", error);
+      }
+    }
+
+    if (user && user.Username) {
+      fetchFavoriteMovies();
     }
   }, [user, token]);
 

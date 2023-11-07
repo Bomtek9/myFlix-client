@@ -48612,12 +48612,13 @@ const ProfileView = ({ user, token, movies, setUser })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
                 className: "",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
-                    className: "justify-content-md-center",
+                    className: "justify-content-left",
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                         md: 8,
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.CardGroup), {
+                            className: "mt-5",
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
-                                className: "mb-5 border border-0 card-custom",
+                                className: "mb-5 border border-4 card-custom",
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Title, {
@@ -48625,13 +48626,6 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                         }, void 0, false, {
                                             fileName: "src/components/profile-view/profile-view.jsx",
                                             lineNumber: 106,
-                                            columnNumber: 19
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
-                                            children: "Please Sign Up"
-                                        }, void 0, false, {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 107,
                                             columnNumber: 19
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {

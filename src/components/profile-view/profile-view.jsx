@@ -98,13 +98,13 @@ const ProfileView = ({ user, token, movies, setUser }) => {
   return (
     <>
       <Container className="">
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-left">
           <Col md={8}>
-            <CardGroup>
-              <Card className="mb-5 border border-0 card-custom">
+            <CardGroup className="mt-5">
+              <Card className="mb-5 border border-4 card-custom">
                 <Card.Body>
                   <Card.Title>My Profile</Card.Title>
-                  <Card.Text>Please Sign Up</Card.Text>
+                  {/* <Card.Text>Please Sign Up</Card.Text> */}
                   <Form onSubmit={handleUpdate}>
                     <Form.Group>
                       <Form.Label>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import {
   Button,
@@ -10,15 +10,33 @@ import {
   Col,
   FormGroup,
 } from "react-bootstrap";
+import "./signup-view.scss";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // Add your validation logic here
+    if (username.length < 5) {
+      setUsernameError("5 alphanumeric characters required");
+      return;
+    } else {
+      setUsernameError("");
+    }
+
+    if (password.length < 6) {
+      setPasswordError("6 alphanumeric characters required");
+      return;
+    } else {
+      setPasswordError("");
+    }
 
     const data = {
       Username: username,
@@ -58,9 +76,9 @@ export const SignupView = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                    minLength="3"
-                    placeholder="Enter a Username (min 5)"
+                    placeholder="Enter a Username"
                   />
+                  <span className="error">{usernameError}</span>
                 </Form.Group>
 
                 <Form.Group controlId="formPassword">
@@ -70,8 +88,9 @@ export const SignupView = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    placeholder="Enter a Password (min 6)"
+                    placeholder="Enter a Password"
                   />
+                  <span className="error">{passwordError}</span>
                 </Form.Group>
 
                 <Form.Group controlId="formEmail">

@@ -5,34 +5,19 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "./navbar.scss";
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
+import logo from "../../img/fullstack_logo.png";
 
 function NavbarComponent({ user, onLoggedOut, movies, search, setSearch }) {
-  // const handleSearch = (event) => {
-  //   event.preventDefault();
-
-  //   const getSearchedMovies = (arr, query) => {
-  //     return arr.filter((movie) => {
-  //       return movie.title.toLowerCase().includes(query.toLowerCase());
-  //     });
-  //   };
-  //   console.log(getSearchedMovies(movies, search));
-  // };
-
   return (
     <Navbar
       expand="lg"
-      className=" mb-5 fixed-top justify-content-end navbar-style "
+      className="mb-5 fixed-top justify-content-end navbar-style"
     >
       <Container className="align-bottom align-items-end align-content-end align-self-end navbar-style">
-        {/* <Navbar.Brand href="#home"> */}
-
-        <Navbar.Brand className="align-bottom navbar-style">
-          Movie App
-        </Navbar.Brand>
+        <Navbar.Brand className="align-bottom navbar-style"></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {/* <Nav className="me-auto justify-content-end"> */}
-          <Nav className=" justify-content-end d-flex flex-grow-1">
+          <Nav className="justify-content-end d-flex flex-grow-1">
             {!user ? (
               <>
                 <Nav.Item>

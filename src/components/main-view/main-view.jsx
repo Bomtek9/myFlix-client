@@ -7,6 +7,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import ProfileView from "../profile-view/profile-view";
 import NavbarComponent from "../navbar/navbar";
+import Logo from "../Logo-view/Logo";
 
 import "./main-view.scss";
 
@@ -60,13 +61,14 @@ export const MainView = () => {
 
   return (
     <Container>
+      <Logo />
+      {/* Include the Logo component at the top */}
       <NavbarComponent
         user={user}
         onLoggedOut={handleLogout}
         movies={movies}
         setSearch={setSearch}
       />
-
       <Row className="justify-content-center mb-5">
         <BrowserRouter>
           <Routes>

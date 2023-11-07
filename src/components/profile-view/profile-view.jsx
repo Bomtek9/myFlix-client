@@ -217,7 +217,6 @@ const ProfileView = ({ user, token, movies, setUser }) => {
       <Container>
         <Row className="justify-content-md-center align-items-center">
           {favoriteMovies.map((movie) => {
-            console.log("Movie in favoriteMovies:", movie);
             return (
               <Col
                 key={movie._id}
@@ -228,6 +227,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
                   token={token}
                   setUser={setUser}
                   user={user}
+                  className="favorite-movie-card" // Apply the class here
                 />
               </Col>
             );

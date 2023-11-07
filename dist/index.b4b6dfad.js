@@ -48551,16 +48551,16 @@ const ProfileView = ({ user, token, movies, setUser })=>{
     const [birthday, setBirthday] = (0, _react.useState)("");
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
-        if (user && user.favoriteMovies) // Use the user's ID or username to fetch favorite movies
-        fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites`, {
+        if (user && user.favoriteMovies) fetch(`https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
             if (response.ok) return response.json();
-            else throw new Error("Failed to fetch favorite movies");
+            else console.error("Failed to fetch favorite movies");
         }).then((data)=>{
+            console.log("Fetched favorite movies:", data);
             setFavoriteMovies(data);
         }).catch((error)=>{
             console.error("Error fetching favorite movies:", error);
@@ -48828,6 +48828,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
                     className: "justify-content-md-center align-items-center",
                     children: favoriteMovies.map((movie)=>{
+                        console.log("Movie in favoriteMovies:", movie);
                         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                             className: "mb-4 justify-content-center align-items-center d-flex",
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCardDefault.default), {
@@ -48837,12 +48838,12 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                 user: user
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 227,
+                                lineNumber: 228,
                                 columnNumber: 17
                             }, undefined)
                         }, movie._id, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 223,
+                            lineNumber: 224,
                             columnNumber: 15
                         }, undefined);
                     })

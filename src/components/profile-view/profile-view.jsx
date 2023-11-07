@@ -23,7 +23,6 @@ const ProfileView = ({ user, token, movies, setUser }) => {
 
   useEffect(() => {
     if (user && user.favoriteMovies) {
-      // Use the user's ID or username to fetch favorite movies
       fetch(
         `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.Username}/favorites`,
         {
@@ -37,10 +36,11 @@ const ProfileView = ({ user, token, movies, setUser }) => {
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error("Failed to fetch favorite movies");
+            console.error("Failed to fetch favorite movies");
           }
         })
         .then((data) => {
+          console.log("Fetched favorite movies:", data);
           setFavoriteMovies(data);
         })
         .catch((error) => {
@@ -219,6 +219,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
       <Container>
         <Row className="justify-content-md-center align-items-center">
           {favoriteMovies.map((movie) => {
+            console.log("Movie in favoriteMovies:", movie);
             return (
               <Col
                 key={movie._id}

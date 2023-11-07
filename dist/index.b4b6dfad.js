@@ -48351,7 +48351,7 @@ const SignupView = ()=>{
                                                 onChange: (e)=>setUsername(e.target.value),
                                                 required: true,
                                                 minLength: "3",
-                                                placeholder: "Enter a Username"
+                                                placeholder: "Enter a Username (min 5)"
                                             }, void 0, false, {
                                                 fileName: "src/components/signup-view/signup-view.jsx",
                                                 lineNumber: 56,
@@ -48378,7 +48378,7 @@ const SignupView = ()=>{
                                                 value: password,
                                                 onChange: (e)=>setPassword(e.target.value),
                                                 required: true,
-                                                placeholder: "Enter a Password"
+                                                placeholder: "Enter a Password (min 6)"
                                             }, void 0, false, {
                                                 fileName: "src/components/signup-view/signup-view.jsx",
                                                 lineNumber: 68,

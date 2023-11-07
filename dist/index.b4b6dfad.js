@@ -48576,10 +48576,10 @@ const ProfileView = ({ user, token, movies, setUser })=>{
     const handleUpdate = (event)=>{
         event.preventDefault();
         let data = {
-            username: username,
-            password: password,
-            email: email,
-            birthday: birthday
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
         };
         //DEBUG
         console.log(JSON.stringify(data));

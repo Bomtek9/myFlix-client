@@ -61,10 +61,10 @@ const ProfileView = ({ user, token, movies, setUser }) => {
     event.preventDefault();
 
     let data = {
-      username: username,
-      password: password,
-      email: email,
-      birthday: birthday,
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday,
     };
 
     //DEBUG

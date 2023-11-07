@@ -19,6 +19,35 @@ const ProfileView = ({ user, token, movies, setUser }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+  useEffect(() => {
+    if (user && user.favoriteMovies) {
+      // Use the user's ID or username to fetch favorite movies
+      fetch(
+        `https://dup-movies-18ba622158fa.herokuapp.com/users/${user.username}/favorites`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Failed to fetch favorite movies");
+          }
+        })
+        .then((data) => {
+          setFavoriteMovies(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching favorite movies:", error);
+        });
+    }
+  }, [user, token]);
 
   //creates an array with all the movies
 
@@ -189,7 +218,7 @@ const ProfileView = ({ user, token, movies, setUser }) => {
 
       <Container>
         <Row className="justify-content-md-center align-items-center">
-          {result.map((movie) => {
+          {favoriteMovies.map((movie) => {
             return (
               <Col
                 key={movie._id}

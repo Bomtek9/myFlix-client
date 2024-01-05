@@ -23,7 +23,6 @@ export const SignupView = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-   
     if (username.length < 5) {
       setUsernameError("5 alphanumeric characters required");
       return;
@@ -51,22 +50,15 @@ export const SignupView = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => {
-        // Log or display the JSON response in case of an error
-        if (!response.ok) {
-          return response.json().then((errorData) => Promise.reject(errorData));
-        }
-    
-        // If response is OK, proceed with successful signup
+    }).then((response) => {
+      if (response.ok) {
         alert("Signup successful");
         window.location.reload();
-      })
-      .catch((error) => {
-        // Handle error and display the error message
-        alert("Signup failed. Error: " + error.message);
-      });
-    
+      } else {
+        alert("Signup failed");
+      }
+    });
+  };
 
   return (
     <Container>

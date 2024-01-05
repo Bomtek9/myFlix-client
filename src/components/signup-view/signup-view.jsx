@@ -50,15 +50,21 @@ export const SignupView = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((response) => {
-      if (response.ok) {
+    })
+      .then((response) => {
+        // Log or display the JSON response in case of an error
+        if (!response.ok) {
+          return response.json().then((errorData) => Promise.reject(errorData));
+        }
+    
+        // If response is OK, proceed with successful signup
         alert("Signup successful");
         window.location.reload();
-      } else {
-        alert("Signup failed");
-      }
-    });
-  };
+      })
+      .catch((error) => {
+        // Handle error and display the error message
+        alert("Signup failed. Error: " + error.message);
+      });
 
   return (
     <Container>

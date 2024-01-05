@@ -34,9 +34,9 @@ export const LoginView = ({ onLoggedIn }) => {
         // Check if onLoggedIn is called
         onLoggedIn(data.user, data.token);
       })
-      .catch((e) => {
-        setError("Login failed. Please check your credentials.");
-        console.error("Error during login:", e);
+      .catch((error) => {
+        console.error("Error during signup:", error);
+        alert("Signup failed. Error: " + error.message);
       });
   };
 

@@ -20,13 +20,17 @@ export const SignupView = () => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // Move the formatBirthday function declaration above its usage
   const formatBirthday = (rawDate) => {
     // Split the date components
     const [month, day, year] = rawDate.split("/");
 
     // Create a new Date object using the components
     const dateObject = new Date(`${year}-${month}-${day}`);
+
+    // Check if the dateObject is a valid date
+    if (isNaN(dateObject.getTime())) {
+      throw new Error("Invalid date");
+    }
 
     // Format the date to match the backend's expected format
     const formattedDate = dateObject.toISOString().split("T")[0];

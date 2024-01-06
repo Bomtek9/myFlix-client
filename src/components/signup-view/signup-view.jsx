@@ -21,21 +21,31 @@ export const SignupView = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const formatBirthday = (rawDate) => {
-    // Split the date components
-    const [month, day, year] = rawDate.split("/");
+    try {
+      // Split the date components
+      const [month, day, year] = rawDate.split("/");
 
-    // Create a new Date object using the components
-    const dateObject = new Date(`${year}-${month}-${day}`);
+      // Log the components to check if they are correct
+      console.log("Month:", month);
+      console.log("Day:", day);
+      console.log("Year:", year);
 
-    // Check if the dateObject is a valid date
-    if (isNaN(dateObject.getTime())) {
-      throw new Error("Invalid date");
+      // Create a new Date object using the components
+      const dateObject = new Date(`${year}-${month}-${day}`);
+
+      // Check if the dateObject is a valid date
+      if (isNaN(dateObject.getTime())) {
+        throw new Error("Invalid date");
+      }
+
+      // Format the date to match the backend's expected format (YYYY-MM-DD)
+      const formattedDate = dateObject.toISOString().split("T")[0];
+
+      return formattedDate;
+    } catch (error) {
+      console.error("Error formatting birthday:", error);
+      throw error;
     }
-
-    // Format the date to match the backend's expected format (YYYY-MM-DD)
-    const formattedDate = dateObject.toISOString().split("T")[0];
-
-    return formattedDate;
   };
 
   const handleSubmit = (event) => {

@@ -35,8 +35,8 @@ export const LoginView = ({ onLoggedIn }) => {
         onLoggedIn(data.user, data.token);
       })
       .catch((error) => {
-        console.error("Error during signup:", error);
-        alert("Signup failed. Error: " + error.message);
+        console.error("Error during login:", error);
+        alert("Login failed. Error: " + error.message);
       });
   };
 

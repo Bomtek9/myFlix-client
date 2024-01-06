@@ -20,6 +20,20 @@ export const SignupView = () => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  // Move the formatBirthday function declaration above its usage
+  const formatBirthday = (rawDate) => {
+    // Split the date components
+    const [month, day, year] = rawDate.split("/");
+
+    // Create a new Date object using the components
+    const dateObject = new Date(`${year}-${month}-${day}`);
+
+    // Format the date to match the backend's expected format
+    const formattedDate = dateObject.toISOString().split("T")[0];
+
+    return formattedDate;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -42,19 +56,6 @@ export const SignupView = () => {
       Password: password,
       Email: email,
       Birthday: formatBirthday(birthday),
-    };
-
-    const formatBirthday = (rawDate) => {
-      // Split the date components
-      const [month, day, year] = rawDate.split("/");
-
-      // Create a new Date object using the components
-      const dateObject = new Date(`${year}-${month}-${day}`);
-
-      // Format the date to match the backend's expected format
-      const formattedDate = dateObject.toISOString().split("T")[0];
-
-      return formattedDate;
     };
 
     fetch("https://dup-movies-18ba622158fa.herokuapp.com/users", {

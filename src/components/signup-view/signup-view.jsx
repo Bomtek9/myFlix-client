@@ -32,7 +32,7 @@ export const SignupView = () => {
       throw new Error("Invalid date");
     }
 
-    // Format the date to match the backend's expected format
+    // Format the date to match the backend's expected format (YYYY-MM-DD)
     const formattedDate = dateObject.toISOString().split("T")[0];
 
     return formattedDate;

@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import {
-  Button,
-  Row,
-  Form,
-  Card,
-  CardGroup,
-  Container,
-  Col,
-  FormGroup,
-} from "react-bootstrap";
+import { Button, Row, Form, Card, Container, Col } from "react-bootstrap";
 import "./signup-view.scss";
 
 export const SignupView = () => {

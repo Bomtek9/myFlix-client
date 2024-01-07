@@ -42,12 +42,15 @@ export const SignupView = () => {
         "Content-Type": "application/json",
       },
     }).then((response) => {
-      if (response.ok) {
-        alert("Signup successful");
-        window.location.reload();
-      } else {
-        alert("Signup failed");
-      }
+      response.json().then((data) => {
+        if (response.ok) {
+          alert("Signup successful");
+          window.location.reload();
+        } else {
+          console.error(data); // Log the response body for debugging
+          alert("Signup failed");
+        }
+      });
     });
   };
 

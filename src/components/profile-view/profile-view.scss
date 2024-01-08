@@ -1,11 +1,11 @@
 .favorite-movie-card {
-    height: 250px; /* Set the desired fixed height */
-  }
-  
-  /* Add styles to limit the number of lines for the title and description */
-  .favorite-movie-card .card-title,
-  .favorite-movie-card .card-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  height: 200px; /* Set the desired fixed height */
+}
+
+/* Add styles to limit the number of lines for the title and description */
+.favorite-movie-card .card-title,
+.favorite-movie-card .card-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

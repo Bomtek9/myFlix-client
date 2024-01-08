@@ -82,7 +82,7 @@ export const MovieCard = ({ movie, token, user, setUser }) => {
   return (
     <Card className="shadow p-4 border-0 h-100">
       <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-        <Card.Img className="m-2" src={movie.ImagePath} />
+        <Card.Img className="img-style" src={movie.ImagePath} />
       </Link>
       <Card.Body>
         <div className="d-flex justify-content-between align-items-center">
